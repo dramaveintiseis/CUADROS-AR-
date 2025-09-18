@@ -9,62 +9,94 @@
   <script type="module" src="https://unpkg.com/@google/model-viewer/dist/model-viewer.min.js"></script>
 
   <style>
-    body {
+    :root {
+      --max-content-width: 900px;
+      --button-gap: 16px;
+    }
+
+    html,body {
       margin: 0;
+      height: 100%;
+      background: #111;
+      font-family: "Georgia", serif;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+
+    .wrap {
       display: flex;
-      flex-direction: column;
       align-items: center;
       justify-content: center;
-      height: 100vh;
-      background: #111;
-      color: white;
-      font-family: Arial, sans-serif;
+      min-height: 100vh;
+      padding: 24px;
+      box-sizing: border-box;
     }
 
     model-viewer {
       width: 100%;
-      max-width: 900px;
-      height: 70vh;
+      max-width: var(--max-content-width);
+      /* Reservamos espacio inferior para que el botón fijo no tape el AR por completo */
+      height: calc(100vh - 140px);
       border-radius: 12px;
       box-shadow: 0 8px 30px rgba(0,0,0,.6);
+      background: #000;
     }
 
-    .btn {
-      margin-top: 20px;
-      padding: 14px 24px;
-      border-radius: 10px;
-      background: #ff0000;
-      color: white;
-      font-size: 18px;
-      font-weight: bold;
-      border: none;
-      cursor: pointer;
+    /* Imagen-botón fija en la parte inferior (responsive) */
+    .button-link {
+      position: fixed;
+      left: 50%;
+      bottom: env(safe-area-inset-bottom, var(--button-gap));
+      transform: translateX(-50%);
+      width: calc(100% - 48px);
+      max-width: var(--max-content-width);
+      z-index: 999;
+      display: block;
       text-decoration: none;
-      transition: background 0.3s;
     }
 
-    .btn:hover {
-      background: #cc0000;
+    .button-link img {
+      display: block;
+      width: 100%;
+      height: auto;
+      border-radius: 10px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.6);
+      cursor: pointer;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    /* Pequeñas mejoras para pantallas muy grandes/pequeñas */
+    @media (max-width: 420px) {
+      model-viewer { height: calc(100vh - 120px); }
+    }
+    @media (min-width: 1200px) {
+      .button-link { bottom: 32px; }
     }
   </style>
 </head>
-<body>
-  <!-- Modelo 3D -->
-  <model-viewer
-    src="model.glb"
-    alt="Mi modelo 3D"
-    ar
-    ar-modes="webxr scene-viewer quick-look"
-    ios-src="model.usdz"
-    camera-controls
-    auto-rotate
-    environment-image="neutral"
-  >
-  </model-viewer>
 
-  <!-- Botón que lleva al disco -->
-  <a href="https://youtu.be/7yFiYSfnURs?si=2c1jMBUWzp6h-_OF" target="_blank" class="btn">
-    🎵 ESCUCHA MUSEO NACIONAL DEL DRAMA
+<body>
+  <div class="wrap">
+    <!-- Si tienes .usdz para iOS, añade ios-src="model.usdz" -->
+    <model-viewer
+      src="model.glb"
+      alt="Mi modelo 3D"
+      ar
+      ar-modes="webxr scene-viewer quick-look"
+      ios-src="model.usdz"
+      camera-controls
+      auto-rotate
+      environment-image="neutral"
+    >
+    </model-viewer>
+  </div>
+
+  <!-- Imagen-botón: coloca aquí la ruta donde subirás la imagen -->
+  <a class="button-link"
+     href="https://youtu.be/7yFiYSfnURs?si=2c1jMBUWzp6h-_OF"
+     target="_blank"
+     rel="noopener noreferrer">
+    <img src="assets/escucha.png" alt="Escucha Museo Nacional del Drama">
   </a>
 </body>
 </html>
