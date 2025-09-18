@@ -9,12 +9,47 @@
   <script type="module" src="https://unpkg.com/@google/model-viewer/dist/model-viewer.min.js"></script>
 
   <style>
-    body{margin:0;display:flex;align-items:center;justify-content:center;height:100vh;background:#111}
-    model-viewer{width:100%;max-width:900px;height:80vh;border-radius:12px;box-shadow:0 8px 30px rgba(0,0,0,.6);}
+    body {
+      margin: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      background: #111;
+      color: white;
+      font-family: Arial, sans-serif;
+    }
+
+    model-viewer {
+      width: 100%;
+      max-width: 900px;
+      height: 70vh;
+      border-radius: 12px;
+      box-shadow: 0 8px 30px rgba(0,0,0,.6);
+    }
+
+    .btn {
+      margin-top: 20px;
+      padding: 14px 24px;
+      border-radius: 10px;
+      background: #ff0000;
+      color: white;
+      font-size: 18px;
+      font-weight: bold;
+      border: none;
+      cursor: pointer;
+      text-decoration: none;
+      transition: background 0.3s;
+    }
+
+    .btn:hover {
+      background: #cc0000;
+    }
   </style>
 </head>
 <body>
-  <!-- Si tienes .usdz para iOS, añade ios-src="model.usdz" -->
+  <!-- Modelo 3D -->
   <model-viewer
     src="model.glb"
     alt="Mi modelo 3D"
@@ -26,5 +61,10 @@
     environment-image="neutral"
   >
   </model-viewer>
+
+  <!-- Botón que lleva al disco -->
+  <a href="https://youtu.be/7yFiYSfnURs?si=2c1jMBUWzp6h-_OF" target="_blank" class="btn">
+    🎵 ESCUCHA MUSEO NACIONAL DEL DRAMA
+  </a>
 </body>
 </html>
